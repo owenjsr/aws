@@ -183,7 +183,7 @@ def get_vpc_id(AWS_ACCESS_KEY,AWS_SECRET_KEY):
 
 def create_s3_bucket(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name):
     REGION = "ap-southeast-2"
-    s3_client = boto3.client('s3', region_name=REGION)
+    s3_client = boto3.client('s3', region_name=REGION, aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
     location = {'LocationConstraint': REGION}
     s3_client.create_bucket(Bucket=AWS_Bucket_Name, CreateBucketConfiguration=location)
 
@@ -215,11 +215,11 @@ def main():
     print("AWS Account Done. Check for errors if any")
     print("=================================")
 
-def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name):
+def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name):
 
     obsrvbl_policy_name = "obsrvbl_policy"
     obsrvbl_role_name = "obsrvbl_role"
-    obsrvbl_domain_name = "cisco-aws-apjc-03"
+    #obsrvbl_domain_name = "cisco-aws-apjc-03"
     obsrvbl_vpc_policy_name = 'obsrvble_vpc_policy'
 
     #try to get the account NUMBER
@@ -250,6 +250,7 @@ def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name):
         print("Carrying on...")
     else:
         print("Role Creation Success")
+
 
     ##Attach obsrvbl_policy to role
     try:
