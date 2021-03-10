@@ -11,7 +11,7 @@ if len(sys.argv) < 2:
     print("Col5: SWATCH Cloud Domain Name")
     exit()
 
-ACCESS_CODES_FILE = AWS_ACCESS_KEY = sys.argv[1]
+ACCESS_CODES_FILE =  sys.argv[1]
 
 print("STARTING PROVISIONING OF ACCOUNTS")
 print("=================================")
