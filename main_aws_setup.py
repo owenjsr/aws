@@ -4,9 +4,9 @@ import sys
 from botocore.exceptions import ClientError
 import time
 
-def ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES):
+def ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION):
 
-    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     print("Creating the instance to ping 8.8.8.8")
     try:
@@ -237,22 +237,23 @@ def main():
     obsrvbl_role_name = "obsrvbl_role"
     obsrvbl_domain_name = "cisco-aws-apjc-03"
     obsrvbl_vpc_policy_name = 'obsrvble_vpc_policy'
+    mAWS_REGION = 'ap-southeast-2'
 
     print("Starting to initalise AWS Account")
     print("=================================")
 
 
-    initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name)
+    initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name, mAWS_REGION)
 
     print("AWS Account Done. Check for errors if any")
     print("=================================")
 
-def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name):
+def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name, mAWS_REGION):
 
     obsrvbl_policy_name = "obsrvbl_policy"
     obsrvbl_role_name = "obsrvbl_role"
     obsrvbl_vpc_policy_name = 'obsrvble_vpc_policy'
-    AWS_REGION = 'ap-southeast-2'
+    AWS_REGION = mAWS_REGION
 
     #try to get the account NUMBER
     try:

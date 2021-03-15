@@ -29,6 +29,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         obsrvbl_policy_name = "obsrvbl_policy"
         obsrvbl_role_name = "obsrvbl_role"
         obsrvbl_vpc_policy_name = 'obsrvble_vpc_policy'
+        AWS_REGION = 'ap-southeast-2'
 
         print("Provisioning Account", AWS_Account_Number)
         print("==========================================")
@@ -38,11 +39,11 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("AWS_Bucket_Name", AWS_Bucket_Name)
         print("obsrvbl_domain_name", obsrvbl_domain_name)
 
-        main_aws_setup.initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name)
+        main_aws_setup.initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name, AWS_REGION)
 
         #run an instance with a ping to 8.8.8.8 just to generate some TrafficType
 
-        main_aws_setup.ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, 1)
+        main_aws_setup.ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, 1, AWS_REGION)
 
 
     print("Processed all lines. Check log for errors.")
