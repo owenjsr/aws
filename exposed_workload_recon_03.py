@@ -64,7 +64,7 @@ def exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Sc
     #create the windows server
     try:
         instance = ec2.create_instances(
-                        ImageId= "ami-0c5ad247344c140a8",
+                        ImageId= "ami-08f90fed89a37985d",
                         InstanceType='t2.micro',
                         MaxCount=NUMBER_OF_INSTANCES,
                         MinCount=NUMBER_OF_INSTANCES,
@@ -95,7 +95,7 @@ def exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Sc
        time.sleep(2)
        count = count + 1
 
-    print ("Attack finished")
+    print ("\rAttack finished")
 
     try:
         print("Terminating Instance")

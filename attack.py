@@ -27,8 +27,8 @@ with open(ACCESS_CODES_FILE) as csv_file:
         AWS_ACCESS_KEY = row[1]
         AWS_SECRET_KEY = row[2]
         AWS_Bucket_Name = row[3]
-        NUMBER_OF_INSTANCES = 1 #Used in attack 01 & 4 (default 2)
-        Scan_Count = 10 #Used in Attack03 (default 250)
+        NUMBER_OF_INSTANCES = 2 #Used in attack 01 & 4 (default 2)
+        Scan_Count = 250 #Used in Attack03 (default 250)
 
         print("Attacking Account", AWS_Account_Number)
         print("************************************************************************************************")

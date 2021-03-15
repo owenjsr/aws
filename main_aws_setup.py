@@ -188,8 +188,8 @@ def create_obsrvble_vpc_policy(AWS_ACCESS_KEY,AWS_SECRET_KEY,policyname,bucketna
 
     return response
 
-def create_flow_logs(AWS_ACCESS_KEY,AWS_SECRET_KEY,vpc,bucket):
-    ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+def create_flow_logs(AWS_ACCESS_KEY,AWS_SECRET_KEY,vpc,bucket, AWS_REGION):
+    ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     response = ec2.create_flow_logs(
         ResourceIds=[vpc],
@@ -203,9 +203,9 @@ def create_flow_logs(AWS_ACCESS_KEY,AWS_SECRET_KEY,vpc,bucket):
 
     return response
 
-def get_vpc_id(AWS_ACCESS_KEY,AWS_SECRET_KEY):
+def get_vpc_id(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_REGION):
     try:
-        ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+        ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
         response = ec2.describe_vpcs()
         vpc_id = response.get('Vpcs', [{}])[0].get('VpcId', '')
         print("Recieved VPC ID "+vpc_id)
@@ -251,8 +251,8 @@ def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl
 
     obsrvbl_policy_name = "obsrvbl_policy"
     obsrvbl_role_name = "obsrvbl_role"
-    #obsrvbl_domain_name = "cisco-aws-apjc-03"
     obsrvbl_vpc_policy_name = 'obsrvble_vpc_policy'
+    AWS_REGION = 'ap-southeast-2'
 
     #try to get the account NUMBER
     try:
@@ -327,7 +327,7 @@ def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl
     ##Getting the VPC Name
     try:
         print("Getting the VPC Name")
-        AWS_VPC_Name = get_vpc_id(AWS_ACCESS_KEY,AWS_SECRET_KEY)
+        AWS_VPC_Name = get_vpc_id(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_REGION)
     except ClientError as e:
         print(e)
         print("Carrying on...")
@@ -337,7 +337,7 @@ def initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl
     ##Create Flow logs
     try:
         print("Creating VPC Logs on "+AWS_VPC_Name)
-        vpc_flow_creation = create_flow_logs(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_VPC_Name,AWS_Bucket_Name)
+        vpc_flow_creation = create_flow_logs(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_VPC_Name,AWS_Bucket_Name,AWS_REGION)
     except ClientError as e:
         print(e)
         print("Carrying on...")
