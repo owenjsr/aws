@@ -40,5 +40,9 @@ with open(ACCESS_CODES_FILE) as csv_file:
 
         main_aws_setup.initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name)
 
+        #run an instance with a ping to 8.8.8.8 just to generate some TrafficType
+
+        main_aws_setup.ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, 1)
+
 
     print("Processed all lines. Check log for errors.")

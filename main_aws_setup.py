@@ -2,6 +2,38 @@ import boto3
 import json
 import sys
 from botocore.exceptions import ClientError
+import time
+
+def ping_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES):
+
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+
+    print("Creating the instance to ping 8.8.8.8")
+    try:
+        instance = ec2.create_instances(
+                        ImageId='ami-0e17ad9abf7e5c818',
+                        InstanceType='t2.micro',
+                        MaxCount=NUMBER_OF_INSTANCES,
+                        MinCount=NUMBER_OF_INSTANCES,
+                        UserData='IyEvYmluL2Jhc2gKcGluZyAtYyAxMCA4LjguOC44CnNodXRkb3duIC1oIG5vdwo=',
+                        )
+        print(instance)
+    except:
+        raise Exception("Couldn't create instance")
+
+    print("Instance created, will wait until it runs then stops")
+
+    for i in instance:
+        while i.state['Name'] != 'stopped':
+           print('Instance is %s' % i.state['Name'])
+           time.sleep(10)
+           i.reload()
+        try:
+            print("Terminating Instance")
+            response = i.terminate()
+            print("Instance Terminated")
+        except:
+            print("There was an error terminating the instance. You may need to terminate it manually")
 
 
 def create_obsrvble_policy(AWS_ACCESS_KEY,AWS_SECRET_KEY,policyname):
