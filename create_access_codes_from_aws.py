@@ -54,7 +54,16 @@ with open(INPUT_FILE) as csv_file:
         except ClientError as e:
             print(e)
 
-        #Create IAM_USER_NAME
+        try:
+            print("Attaching Admin Access")
+            response = iam.attach_user_policy(
+                UserName='aws_provisioning_user',
+                PolicyArn='arn:aws:iam::aws:policy/AdministratorAccess'
+            )
+        except ClientError as e:
+            print(e)
+
+        #Create access key
         try:
             # Create an access key
             print("Creating an access key for account", AWS_Account_Number)
