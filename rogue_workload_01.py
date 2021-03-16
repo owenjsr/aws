@@ -6,10 +6,10 @@ import sys
 #version 2: removed the need for the template by launcing instance with a
 #resource instead of a client
 
-def rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES):
+def rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION):
 
 
-    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     try:
         instance = ec2.create_instances(
@@ -57,8 +57,9 @@ def main():
     AWS_SECRET_KEY = sys.argv[2]
     #LAUNCH_TEMPLATE_ID = 'AWS_Workshop_Template'
     NUMBER_OF_INSTANCES = 2
+    AWS_REGION = 'ap-southeast-2'
 
-    rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES)
+    rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION)
 
     print ("Scenario 01: All Done")
     print("====================================================================")

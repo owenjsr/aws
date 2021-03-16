@@ -6,6 +6,8 @@ import exposed_workload_recon_03
 import data_exfil_04
 import ping_bad_gateway_05
 
+AWS_REGION = 'ap-southeast-2'
+
 if len(sys.argv) < 2:
     print("Must supply the file name with the csv credentials")
     print("Col1: Account Number")
@@ -40,7 +42,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("Running Scenario 1: launch instances to trigger a watchlist")
         print("====================================================================")
 
-        rogue_workload_01.rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES)
+        rogue_workload_01.rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION)
 
         print ("Scenario 01: All Done")
         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
