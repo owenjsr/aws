@@ -50,7 +50,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("Running Scenario 2: Permissive VPC SG ACL")
         print("====================================================================")
 
-        permissive_vpc_sg_acl_02.premissive_vpc_sg(AWS_ACCESS_KEY,AWS_SECRET_KEY)
+        permissive_vpc_sg_acl_02.premissive_vpc_sg(AWS_ACCESS_KEY,AWS_SECRET_KEY, AWS_REGION)
 
         print("Scenario 2: All done")
         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
@@ -58,7 +58,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("Running Scenario 3: Exposed Workload recon")
         print("====================================================================")
 
-        exposed_workload_recon_03.exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count)
+        exposed_workload_recon_03.exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count, AWS_REGION)
 
         print ("SCENARIO 03: COMPLETED")
         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
@@ -66,7 +66,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("Running Scenario 4: data exfil via DNS port")
         print("====================================================================")
 
-        data_exfil_04.data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES)
+        data_exfil_04.data_exfil(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION)
 
         print("Running Scenario 4: Completed")
         print("====================================================================")
@@ -74,7 +74,7 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("Running Scenario 5: generating an instance to ping a bad destination")
         print("====================================================================")
 
-        ping_bad_gateway_05.ping_bad_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES)
+        ping_bad_gateway_05.ping_bad_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION)
 
         print("Running Scenario 5: Completed")
         print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")

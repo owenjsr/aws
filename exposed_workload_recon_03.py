@@ -23,13 +23,14 @@ def main():
     NUMBER_OF_INSTANCES = 1
     Scan_Count = 250
 
-    exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count)
+    AWS_REGION = 'ap-southeast-2'
+    exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count,AWS_REGION)
 
     print ("SCENARIO 03: COMPLETED")
     print("====================================================================")
 
-def exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count):
-    ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+def exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Scan_Count, AWS_REGION):
+    ec2 = boto3.client('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     #get VPC ID
     try:
@@ -59,12 +60,12 @@ def exposed_workload_recon(AWS_ACCESS_KEY, AWS_SECRET_KEY,NUMBER_OF_INSTANCES,Sc
     except ClientError as e:
         print(e)
 
-    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     #create the windows server
     try:
         instance = ec2.create_instances(
-                        ImageId= "ami-08f90fed89a37985d",
+                        ImageId= "ami-0b3d7a5ecc2daba4c",
                         InstanceType='t2.micro',
                         MaxCount=NUMBER_OF_INSTANCES,
                         MinCount=NUMBER_OF_INSTANCES,

@@ -12,6 +12,7 @@ def main():
     AWS_ACCESS_KEY = sys.argv[1]
     AWS_SECRET_KEY = sys.argv[2]
     NUMBER_OF_INSTANCES = 1
+    AWS_REGION = 'ap-southeast-2'
 
     print("Running Scenario 5: generating an instance to ping a bad destination")
     print("====================================================================")
@@ -21,14 +22,14 @@ def main():
     print("Running Scenario 5: Completed")
     print("====================================================================")
 
-def ping_bad_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES):
+def ping_bad_gw(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGION):
 
-    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY)
+    ec2 = boto3.resource('ec2', aws_access_key_id = AWS_ACCESS_KEY, aws_secret_access_key = AWS_SECRET_KEY, region_name=AWS_REGION)
 
     print("Creating the instance to ping the bad resource")
     try:
         instance = ec2.create_instances(
-                        ImageId='ami-0e17ad9abf7e5c818',
+                        ImageId='ami-0b3d7a5ecc2daba4c',
                         InstanceType='t2.micro',
                         MaxCount=NUMBER_OF_INSTANCES,
                         MinCount=NUMBER_OF_INSTANCES,
