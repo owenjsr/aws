@@ -252,15 +252,15 @@
   "targets": {
     "definition_target_01MPGJV9GQBEY6Gig5CO7kY4RAICDkHswVy": {
       "unique_name": "definition_target_01MPGJV9GQBEY6Gig5CO7kY4RAICDkHswVy",
-      "name": "AWS_ymughrab",
-      "title": "AWS_ymughrab",
+      "name": "AWS_name",
+      "title": "AWS_title",
       "type": "aws.endpoint",
       "base_type": "target",
       "object_type": "definition_target",
       "properties": {
         "default_runtime_user_id": "definition_runtime_user_01MPGJJADABB12HFFVyPQbnw35iHIBv6STl",
-        "description": "Yazan's Cisco production AWS Account",
-        "display_name": "AWS_ymughrab",
+        "description": "Your production AWS Account",
+        "display_name": "AWS_keys",
         "ignore_proxy": false,
         "region": "ap-southeast-2"
       }
@@ -269,15 +269,15 @@
   "runtime_users": {
     "definition_runtime_user_01MPGJJADABB12HFFVyPQbnw35iHIBv6STl": {
       "unique_name": "definition_runtime_user_01MPGJJADABB12HFFVyPQbnw35iHIBv6STl",
-      "name": "AWS_yazanm_keys",
-      "title": "AWS_yazanm_keys",
+      "name": "AWS_keys",
+      "title": "AWS_keys",
       "type": "runtime_user.aws_credentials",
       "base_type": "runtime_user",
       "object_type": "definition_runtime_user",
       "properties": {
         "access_key": "*****",
-        "description": "Keys for ymughrab's AWS Account",
-        "display_name": "AWS_yazanm_keys",
+        "description": "Keys for AWS Account",
+        "display_name": "AWS_keys",
         "secret_key": "*****"
       }
     }
