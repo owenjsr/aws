@@ -13,7 +13,7 @@ def rogue_workload(AWS_ACCESS_KEY, AWS_SECRET_KEY, NUMBER_OF_INSTANCES, AWS_REGI
 
     try:
         instance = ec2.create_instances(
-                        ImageId='ami-0e17ad9abf7e5c818',
+                        ImageId='ami-0b3d7a5ecc2daba4c',
                         InstanceType='t2.micro',
                         MaxCount=NUMBER_OF_INSTANCES,
                         MinCount=NUMBER_OF_INSTANCES,
