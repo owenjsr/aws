@@ -91,4 +91,4 @@ with open(OUTPUT_FILE, mode='w') as output_file:
         output_writer.writerow(line)
 
 
-print("Processed all lines. Check log for errors. Total of ", x-2)
+print("Processed all lines. Check log for errors. Total of ", x-1)
