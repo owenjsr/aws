@@ -1,6 +1,7 @@
 import boto3
 from botocore.exceptions import ClientError
 import sys
+from random import randrange
 
 #check if any arguments given
 def main():
@@ -33,7 +34,7 @@ def premissive_vpc_sg(AWS_ACCESS_KEY, AWS_SECRET_KEY, AWS_REGION):
 
     #create security group
     try:
-        response = ec2.create_security_group(GroupName='AWS_Security_Group',
+        response = ec2.create_security_group(GroupName='AWS_Security_Group'+str(randrange(100000)),
                                              Description='An overly permissive SG',
                                              VpcId=vpc_id)
         security_group_id = response['GroupId']
