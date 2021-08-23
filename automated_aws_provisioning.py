@@ -39,6 +39,8 @@ with open(ACCESS_CODES_FILE) as csv_file:
         print("AWS_Bucket_Name", AWS_Bucket_Name)
         print("obsrvbl_domain_name", obsrvbl_domain_name)
 
+        print("**** role path: arn:aws:iam::"+AWS_Account_Number+":role/obsrvbl_role")
+
         main_aws_setup.initialise_aws_account(AWS_ACCESS_KEY,AWS_SECRET_KEY,AWS_Bucket_Name,obsrvbl_domain_name, AWS_REGION)
 
         #run an instance with a ping to 8.8.8.8 just to generate some TrafficType
